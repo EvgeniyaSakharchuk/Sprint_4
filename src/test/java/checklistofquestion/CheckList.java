@@ -14,7 +14,7 @@ public class MainPageQuestions extends BaseTest {
     private static String answer_text_expected;
     private static By question_click;
     private static By answer;
-
+//testdata
     public MainPageQuestions(String answer_text_expected, By question_click, By answer) {
         this.answer_text_expected = answer_text_expected;
         this.question_click = question_click;

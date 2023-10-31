@@ -11,9 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pageobject.MainPage;
 import pageobject.OrderPageAboutRent;
 import pageobject.OrderPageForWhom;
-
 import java.time.Duration;
-
 import static pageobject.MainPage.orderButtonAbove;
 import static pageobject.MainPage.orderButtonCenter;
 
@@ -40,7 +38,7 @@ public class PlaceOrderScooter {
             PlaceOrderKickScooter.comment = comment;
         }
 
-        @Parameterized.Parameters // параметризация
+        @Parameterized.Parameters
         public static Object[][] getCredentials() {
             return new Object[][]{
                     {orderButtonAbove, "Евгения", "Сахарчук", "улица", "+79998887766", "03.11.17911", "Дайте дженчине покататься"},
