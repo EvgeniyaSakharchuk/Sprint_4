@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MainPage {
-    private final String site = "https://qa-scooter.praktikum-services.ru/";
+    private static final String site = "https://qa-scooter.praktikum-services.ru/";
 
     public void openSite() {
         driver.get(site);
@@ -185,5 +185,8 @@ public class MainPage {
         //ответ на вопрос 8
     }
 
+    public void quitBrows(){
+        driver.quit();
+    }
 
 }

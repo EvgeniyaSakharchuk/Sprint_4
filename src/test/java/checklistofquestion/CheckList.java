@@ -2,117 +2,48 @@ package checklistofquestion;
 
 import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pageobject.MainPage;
-
-import java.time.Duration;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.openqa.selenium.By
 import static org.junit.Assert.assertEquals;
 import static pageobject.MainPage.*;
 
-public class CheckListQuestions {
-    private WebDriver driver;
+@RunWith(Parameterized.class)
+public class MainPageQuestions extends BaseTest {
+    static MainPage mainPage
+    private static String answer_text_expected;
+    private static By question_click;
+    private static By answer;
 
-    @Test
-    public void testQuestionOne() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonOneQuestion(questionOne);
-        assertEquals(MainPage.questionOneText, mainPage.getTextQuestionOne());  // сравнить текст
+    public MainPageQuestions(String answer_text_expected, By question_click, By answer) {
+        this.answer_text_expected = answer_text_expected;
+        this.question_click = question_click;
+        this.answer = answer;
+    }
+
+    @Parameterized.Parameters
+
+    public static Object[][] getCredentials() {
+        return new Object[][] {
+                { questionOneText,questionOne ,answerOne},
+                { questionTwoText, questionTwo, answerTwo},
+                { questionThreeText, questionThree, answerThree},
+                { questionFourText, questionFour, answerFour},
+                { questionFiveText, questionFive, answerFive},
+                { questionSixText, questionSix, answerSix},
+                { questionSevenText, questionSeven, answerSeven},
+                { questionEightText, questionEight, answerEight}
+        };
     }
 
     @Test
-    public void testQuestionTwo() {
-        driver = new ChromeDriver();
+    public void checkActualText_expectText(){
+        super.implicitlyWait(10);
         MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonTwoQuestion(questionTwo);
-        assertEquals(MainPage.questionTwoText, mainPage.getTextQuestionTwo());  // сравнить текст
-    }
-
-    @Test
-    public void testQuestionThree() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonThreeQuestion(questionThree);
-        assertEquals(MainPage.questionThreeText, mainPage.getTextQuestionThree());  // сравнить текст
-    }
-
-    @Test
-    public void testQuestionFour() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonFourQuestion(questionFour);
-        assertEquals(MainPage.questionFourText, mainPage.getTextQuestionFour());  // сравнить текст
-    }
-
-    @Test
-    public void testQuestionFive() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonFiveQuestion(questionFive);
-        assertEquals(MainPage.questionFiveText, mainPage.getTextQuestionFive());  // сравнить текст
-    }
-
-    @Test
-    public void testQuestionSix() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonSixQuestion(questionSix);
-        assertEquals(MainPage.questionSixText, mainPage.getTextQuestionSix());  // сравнить текст
-    }
-
-    @Test
-    public void testQuestionSeven() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonSevenQuestion(questionSeven);
-        assertEquals(MainPage.questionSevenText, mainPage.getTextQuestionSeven());  // сравнить текст
-    }
-
-    @Test
-    public void testQuestionEight() {
-        driver = new ChromeDriver();
-        MainPage mainPage = new MainPage(driver);
-        driver.manage().window().maximize();
-        mainPage.openSite();
-        mainPage.scrollToElement();
-        mainPage.clickCookie();
-        mainPage.clickButtonEightQuestion(questionEight);
-        assertEquals(MainPage.questionEightText, mainPage.getTextQuestionEight());  // сравнить текст
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
+        mainPage.Open();
+        String actualQuestion = mainPage.clickQuest(question_click);
+        String actualAnswer = mainPage.answerDisplayed(answer);
+        assertEquals(answer_text_expected, question_click, answer);
     }
 
 }
