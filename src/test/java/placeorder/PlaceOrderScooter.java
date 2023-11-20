@@ -19,8 +19,7 @@ import static pageobject.MainPage.orderButtonCenter;
 public class PlaceOrderScooter {
     @RunWith(Parameterized.class)
     public class PlaceOrderKickScooter {
-        private WebDriver driver;
-        private static By orderButton;
+        private WebDriver driver
         private static String name;
         private static String surname;
         private static String address;
@@ -28,8 +27,7 @@ public class PlaceOrderScooter {
         private static String dayWhatIWant;
         private static String comment;
 
-        public PlaceOrderKickScooter(By orderButton, String name, String surname, String address, String phoneNumber, String dayWhatIWant, String comment) {
-            PlaceOrderKickScooter.orderButton = orderButton;
+        public PlaceOrderKickScooter( String name, String surname, String address, String phoneNumber, String dayWhatIWant, String comment) {
             PlaceOrderKickScooter.name = name;
             PlaceOrderKickScooter.surname = surname;
             PlaceOrderKickScooter.address = address;
@@ -41,8 +39,8 @@ public class PlaceOrderScooter {
         @Parameterized.Parameters
         public static Object[][] getCredentials() {
             return new Object[][]{
-                    {orderButtonAbove, "Евгения", "Сахарчук", "улица", "+79998887766", "03.11.17911", "Дайте дженчине покататься"},
-                    {orderButtonCenter, "Антон", "Лихачев", "Северная улица", "88887776655", "01.01.2022", "Эх прокачусь"}
+                    {"Евгения", "Сахарчук", "улица", "+79998887766", "03.11.17911", "Дайте дженчине покататься"},
+                    {"Антон", "Лихачев", "Северная улица", "88887776655", "01.01.2022", "Эх прокачусь"}
             };
         }
 
@@ -59,9 +57,8 @@ public class PlaceOrderScooter {
         @Test
         public void mainValidDataIsSuccess() {
             MainPage mainPage = new MainPage(driver);
-            mainPage.clickOrderButton(orderButton);
+            mainPage.clickOrderButton(orderButtonAbove);
             OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
-
             orderPageForWhom.enterName(name);
             orderPageForWhom.enterSurname(surname);
             orderPageForWhom.enterAddress(address);
@@ -80,7 +77,14 @@ public class PlaceOrderScooter {
             orderPageAboutRent.checkOrderComplete();
             //раздел про время аренды самоката
         }
+        @Test
+        public void checkFormIsOpen(){
+            MainPage mainPage = new MainPage(driver);
+            mainPage.clickOrderButton(orderButtonCenter);
+            OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
+            orderPageForWhom.clickNextButton();
 
+        }
         @After
         public void tearDown() {
             driver.quit();
