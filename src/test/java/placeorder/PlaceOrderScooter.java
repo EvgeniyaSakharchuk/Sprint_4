@@ -16,7 +16,7 @@ import static pageobject.MainPage.orderButtonAbove;
 import static pageobject.MainPage.orderButtonCenter;
 
 
-public class PlaceOrderScooter {
+public class PlaceOrderScooter extends BaseTest {
     @RunWith(Parameterized.class)
     public class PlaceOrderKickScooter {
         private WebDriver driver
@@ -42,16 +42,6 @@ public class PlaceOrderScooter {
                     {"Евгения", "Сахарчук", "улица", "+79998887766", "03.11.17911", "Дайте дженчине покататься"},
                     {"Антон", "Лихачев", "Северная улица", "88887776655", "01.01.2022", "Эх прокачусь"}
             };
-        }
-
-        @Before
-        public void setUp() {
-            driver = new ChromeDriver();
-            //driver = new FirefoxDriver();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-            MainPage mainPage = new MainPage(driver);
-            mainPage.openSite();
-            mainPage.clickCookie();
         }
 
         @Test
@@ -84,10 +74,6 @@ public class PlaceOrderScooter {
             OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
             orderPageForWhom.clickNextButton();
 
-        }
-        @After
-        public void tearDown() {
-            driver.quit();
         }
 
     }
