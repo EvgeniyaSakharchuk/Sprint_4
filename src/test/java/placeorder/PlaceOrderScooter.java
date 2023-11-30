@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,24 +21,24 @@ public class PlaceOrderScooter extends BaseTest {
     @RunWith(Parameterized.class)
     public class PlaceOrderKickScooter {
         private WebDriver driver
-        private static String name;
-        private static String surname;
-        private static String address;
-        private static String phoneNumber;
-        private static String dayWhatIWant;
-        private static String comment;
+        private final String name;
+        private final String surname;
+        private final String address;
+        private final String phoneNumber;
+        private final String dayWhatIWant;
+        private final String comment;
 
-        public PlaceOrderKickScooter( String name, String surname, String address, String phoneNumber, String dayWhatIWant, String comment) {
-            PlaceOrderKickScooter.name = name;
-            PlaceOrderKickScooter.surname = surname;
-            PlaceOrderKickScooter.address = address;
-            PlaceOrderKickScooter.phoneNumber = phoneNumber;
-            PlaceOrderKickScooter.dayWhatIWant = dayWhatIWant;
-            PlaceOrderKickScooter.comment = comment;
+        public PlaceOrderKickScooter(String name, String surname, String address, String phoneNumber, String dayWhatIWant, String comment) {
+            this.name = name;
+            this.surname = surname;
+            this.address = address;
+            this.phoneNumber = phoneNumber;
+            this.dayWhatIWant = dayWhatIWant;
+            this.comment = comment;
         }
 
         @Parameterized.Parameters
-        public static Object[][] getCredentials() {
+        public static Object[][] getOrderDataSet() {
             return new Object[][]{
                     {"Евгения", "Сахарчук", "улица", "+79998887766", "03.11.17911", "Дайте дженчине покататься"},
                     {"Антон", "Лихачев", "Северная улица", "88887776655", "01.01.2022", "Эх прокачусь"}
@@ -66,15 +67,16 @@ public class PlaceOrderScooter extends BaseTest {
             orderPageAboutRent.confirmOrder();
             orderPageAboutRent.checkOrderComplete();
             //раздел про время аренды самоката
-        }
-        @Test
-        public void checkFormIsOpen(){
-            MainPage mainPage = new MainPage(driver);
-            mainPage.clickOrderButton(orderButtonCenter);
-            OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
-            orderPageForWhom.clickNextButton();
 
         }
 
+    }
+
+    @Test
+    public void checkFormIsOpen() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickOrderButton(orderButtonCenter);
+        OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
+        assertTrue(orderPageForWhom.isFormOpened());
     }
 }

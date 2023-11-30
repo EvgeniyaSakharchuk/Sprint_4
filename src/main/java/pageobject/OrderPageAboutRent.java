@@ -1,9 +1,9 @@
 package pageobject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
 public class OrderPageAboutRent {
-    public class OrderPageAboutRent {
+    public class OrderPageRent {
         // url страницы с формой заказа
         private final String urlHomePage = "https://qa-scooter.praktikum-services.ru/order";
         private final By dateField = By.xpath(".//input[contains(@placeholder, 'Когда привезти самокат')]");
@@ -26,7 +26,7 @@ public class OrderPageAboutRent {
         //сообщение об успешном оформлении
         private final WebDriver driver;
 
-        public OrderPageAboutRent(WebDriver driver) {
+        public OrderPageRent(WebDriver driver) {
             this.driver = driver;
         }
 
@@ -65,4 +65,5 @@ public class OrderPageAboutRent {
             driver.findElement(notificationOfSuccessfulOrder).isDisplayed();
             //сообщение об успешном заказе
         }
+    }
 }

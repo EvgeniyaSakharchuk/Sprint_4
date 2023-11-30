@@ -47,7 +47,7 @@ public class CheckListQuestion {
         }
 
         @Test
-        public void ListTest() {
+        public void listTest() {
             MainPage mainPage = new MainPage(driver);
             mainPage.goToFAQ();
             mainPage.openAccordionQuestion(question);

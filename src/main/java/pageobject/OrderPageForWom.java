@@ -13,7 +13,7 @@ public class OrderPageForWom {
     private final By nextButton = By.xpath(".//button[text()='Далее']");
     private final WebDriver driver;
 
-    public OrderPageForWhom(WebDriver driver) {
+    public OrderPageForWom(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -41,5 +41,10 @@ public class OrderPageForWom {
     public void clickNextButton() {
         this.driver.findElement(this.nextButton).click();
     }
+
+    public boolean isFormOpened(String text) {
+        return webDriver.findElement(By.xpath(".//input[contains(@placeholder" + (text)).isDisplayed);
+    }
+
 
 }
