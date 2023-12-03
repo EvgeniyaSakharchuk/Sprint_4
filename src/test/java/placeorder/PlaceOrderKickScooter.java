@@ -1,16 +1,15 @@
 package placeorder;
 
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
-        import org.junit.runners.Parameterized;
-        import org.openqa.selenium.WebDriver;
-        import pageobject.MainPage;
-        import pageobject.OrderPageAboutRent;
-        import pageobject.OrderPageForWhom;
-
-        import static org.junit.Assert.assertTrue;
-        import static pageobject.MainPage.orderButtonAbove;
-        import static pageobject.MainPage.orderButtonCenter;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.openqa.selenium.WebDriver;
+import pageobject.MainPage;
+import pageobject.OrderPageAboutRent;
+import pageobject.OrderPageForWhom;
+import static org.junit.Assert.assertTrue;
+import static pageobject.MainPage.orderButtonAbove;
+import static pageobject.MainPage.orderButtonCenter;
 
 
 

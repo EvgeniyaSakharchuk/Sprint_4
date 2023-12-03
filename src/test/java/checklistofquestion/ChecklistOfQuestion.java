@@ -11,14 +11,14 @@ import org.junit.Assert;
 import java.util.concurrent.TimeUnit;
 
 
-public class CheckListQuestion {
+
     @RunWith(Parameterized.class)
-    public class ChecklistQuestion {
+    public class ChecklistOfQuestion {
         private WebDriver driver;
         private final String question;
         private final String answer;
 
-        public ChecklistQuestion(String question, String answer) {
+        public ChecklistOfQuestion(String question, String answer) {
             this.question = question;
             this.answer = answer;
         }
@@ -47,7 +47,7 @@ public class CheckListQuestion {
         }
 
         @Test
-        public void listTest() {
+        public void ListTest() {
             MainPage mainPage = new MainPage(driver);
             mainPage.goToFAQ();
             mainPage.openAccordionQuestion(question);
@@ -60,6 +60,5 @@ public class CheckListQuestion {
             driver.quit();
         }
     }
-}
 
 
