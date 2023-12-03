@@ -1,10 +1,11 @@
 package placeorder;
-
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
@@ -12,16 +13,19 @@ public class BaseTest {
 
     @Before
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
+        String browser = System.getProperty("browser");
+        if ("chrome".equalsIgnoreCase(browser)) {
+            driver = new ChromeDriver();
+        }
+        else if ("firefox".equalsIgnoreCase(browser)) {
+            driver = new FirefoxDriver();
+        }}
 
     @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    public void closeSession() {
+        driver.quit();
+    }
+    public void implicitlyWait(long numberOfSeconds) {
+        driver.manage().timeouts().implicitlyWait(numberOfSeconds, TimeUnit.SECONDS);
     }
 }

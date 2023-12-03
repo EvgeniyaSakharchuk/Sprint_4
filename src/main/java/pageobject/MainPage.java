@@ -7,16 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-
-import java.time.Duration;
+import static java.time.Duration.*;
 
 
 public class MainPage {
 
 
-    // url главной страницы-----------------------------------------------------------
-    private final String site = "https://qa-scooter.praktikum-services.ru/";
-    public void openSite() {driver.get(site); }
+    public void openSite() {
+        // url главной страницы-----------------------------------------------------------
+        String site = "https://qa-scooter.praktikum-services.ru/";
+        driver.get(site); }
     //--------------------------------------------------------------------------------------
     public static By orderButtonAbove = By.xpath(".//button[@class='Button_Button__ra12g']");
     // кнопка Заказать в шапке сайта
@@ -55,10 +55,9 @@ public class MainPage {
     }
 
     public String getAnswer(String answer) {
-        final Wait<WebDriver> wait = new FluentWait<>(driver).withMessage("Элемент не найден").withTimeout(Duration.ofSeconds(2));
+        final Wait<WebDriver> wait = new FluentWait<>(driver).withMessage("Элемент не найден").withTimeout(ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='accordion__panel']//p[text()='" + answer + "']"))));
         return driver.findElement(By.xpath("//div[@class='accordion__panel']//p[text()='" + answer + "']")).getText();
     }
 
 }
-

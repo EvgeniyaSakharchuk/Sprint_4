@@ -1,26 +1,22 @@
 package placeorder;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.Assert.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pageobject.MainPage;
-import pageobject.OrderPageAboutRent;
-import pageobject.OrderPageForWhom;
-import java.time.Duration;
-import static pageobject.MainPage.orderButtonAbove;
-import static pageobject.MainPage.orderButtonCenter;
+        import org.junit.Test;
+        import org.junit.runner.RunWith;
+        import org.junit.runners.Parameterized;
+        import org.openqa.selenium.WebDriver;
+        import pageobject.MainPage;
+        import pageobject.OrderPageAboutRent;
+        import pageobject.OrderPageForWhom;
+
+        import static org.junit.Assert.assertTrue;
+        import static pageobject.MainPage.orderButtonAbove;
+        import static pageobject.MainPage.orderButtonCenter;
 
 
-public class PlaceOrderScooter extends BaseTest {
+
     @RunWith(Parameterized.class)
-    public class PlaceOrderKickScooter {
-        private WebDriver driver
+    public class PlaceOrderKickScooter extends BaseTest {
+        private WebDriver driver;
         private final String name;
         private final String surname;
         private final String address;
@@ -28,7 +24,7 @@ public class PlaceOrderScooter extends BaseTest {
         private final String dayWhatIWant;
         private final String comment;
 
-        public PlaceOrderKickScooter(String name, String surname, String address, String phoneNumber, String dayWhatIWant, String comment) {
+        public PlaceOrderKickScooter (String name, String surname, String address, String phoneNumber, String dayWhatIWant, String comment) {
             this.name = name;
             this.surname = surname;
             this.address = address;
@@ -38,7 +34,7 @@ public class PlaceOrderScooter extends BaseTest {
         }
 
         @Parameterized.Parameters
-        public static Object[][] getOrderDataSet() {
+        public Object[][] getOrderDataSet() {
             return new Object[][]{
                     {"Евгения", "Сахарчук", "улица", "+79998887766", "03.11.17911", "Дайте дженчине покататься"},
                     {"Антон", "Лихачев", "Северная улица", "88887776655", "01.01.2022", "Эх прокачусь"}
@@ -67,16 +63,18 @@ public class PlaceOrderScooter extends BaseTest {
             orderPageAboutRent.confirmOrder();
             orderPageAboutRent.checkOrderComplete();
             //раздел про время аренды самоката
+        }
+        @Test
+        public void checkFormIsOpen(){
+            MainPage mainPage = new MainPage(driver);
+            mainPage.clickOrderButton(orderButtonCenter);
+            OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
+            assertTrue(orderPageForWhom.isFormOpened());
 
         }
 
+        public void setUp(WebDriver driver) {
+            this.driver = driver;
+        }
     }
 
-    @Test
-    public void checkFormIsOpen() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickOrderButton(orderButtonCenter);
-        OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
-        assertTrue(orderPageForWhom.isFormOpened());
-    }
-}
