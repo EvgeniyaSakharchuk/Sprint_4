@@ -12,14 +12,16 @@ import static java.time.Duration.*;
 public class MainPage {
 
 
-    public void openSite() {
+    public static final
         // url главной страницы-----------------------------------------------------------
         String site = "https://qa-scooter.praktikum-services.ru/";
-        driver.get(site); }
+        private static WebDriver driver = null;
+
+   
     //--------------------------------------------------------------------------------------
-    public static By orderButtonAbove = By.xpath(".//button[@class='Button_Button__ra12g']");
+    public static final By orderButtonAbove = By.xpath(".//button[@class='Button_Button__ra12g']");
     // кнопка Заказать в шапке сайта
-    public static By orderButtonCenter = By.xpath(".//button[contains(@class, 'Button_Middle__1CSJM')]");
+    public static final By orderButtonCenter = By.xpath(".//button[contains(@class, 'Button_Middle__1CSJM')]");
     // кнопка заказать по центру сайта
     private final By cookieButton = By.id("rcc-confirm-button");
     // кнопка с куки
@@ -27,11 +29,32 @@ public class MainPage {
 // Заголовок Вопросы о важном new
 
     //-----------------------------------------------------------------------------------
-    private final WebDriver driver;
-    public MainPage(WebDriver driver) {this.driver = driver;}
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
-// Методы общие ----------------------------------------------------------
+    public final MainPage site() {
+        driver.get(site);
+        final MainPage mainPage = this;
+        return mainPage;
+    }
 
+    // Методы общие ----------------------------------------------------------
+    //   public MainPage open(){
+     //   driver.get(site);
+     //   return this;
+     //  }
+
+       public MainPage clickButtonAbove(){
+        driver.findElement(orderButtonAbove).click();
+        return this;
+       }
+    public MainPage clickButtonCenter(){
+        WebElement element = driver.findElement(orderButtonCenter);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        element.click();
+        return this;
+    }
     public void clickCookie() {
         driver.findElement(cookieButton).click();
 
