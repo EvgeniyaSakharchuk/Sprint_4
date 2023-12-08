@@ -12,35 +12,54 @@ import static java.time.Duration.*;
 public class MainPage {
 
 
-    public void openSite() {
-        // url главной страницы-----------------------------------------------------------
-        String site = "https://qa-scooter.praktikum-services.ru/";
-        driver.get(site); }
+    public static final
+    // url главной страницы-//----------------------------------------------------------
+    String site = "https://qa-scooter.praktikum-services.ru/";
+    private static WebDriver driver = null;
+
+
     //--------------------------------------------------------------------------------------
-    public static By orderButtonAbove = By.xpath(".//button[@class='Button_Button__ra12g']");
+    public static final By orderButtonAbove = By.xpath(".//button[@class='Button_Button__ra12g']");
     // кнопка Заказать в шапке сайта
-    public static By orderButtonCenter = By.xpath(".//button[contains(@class, 'Button_Middle__1CSJM')]");
+    public static final By orderButtonCenter = By.xpath(".//button[@class='Button_Button__ra12g']");
     // кнопка заказать по центру сайта
     private final By cookieButton = By.id("rcc-confirm-button");
     // кнопка с куки
     private final By frequentlyAskedQuestionsHeader = By.xpath("//div[@class='Home_FourPart__1uthg']//div[@class='Home_SubHeader__zwi_E']");
+
 // Заголовок Вопросы о важном new
 
     //-----------------------------------------------------------------------------------
-    private final WebDriver driver;
-    public MainPage(WebDriver driver) {this.driver = driver;}
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
-// Методы общие ----------------------------------------------------------
+    public MainPage clickButtonCeneter(){
+        WebElement buttonStartOrder = driver.findElement(orderButtonCenter);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", buttonStartOrder);
+        driver.findElement(orderButtonCenter).click();
+        return this;
+    }
 
-    public void clickCookie() {
+    public  final MainPage site() {
+        driver.get(site);
+        final MainPage mainPage = this;
+        return mainPage;
+    }
+
+    // Методы общие ----------------------------------------------------------
+
+    public MainPage clickButtonAbove(){
+        driver.findElement(orderButtonAbove).click();
+        return this;
+    }
+
+    public MainPage clickCookie() {
         driver.findElement(cookieButton).click();
+        return this;
 
     }
-    //Методы заказа --------------------------------------------------------------
-    public void clickOrderButton(By orderButton) {
-        driver.findElement(orderButton).click();
 
-    }
 
     //Методы для вопрос-ответ--------------------------------------------------
     public void goToFAQ() {
@@ -58,5 +77,6 @@ public class MainPage {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='accordion__panel']//p[text()='" + answer + "']"))));
         return driver.findElement(By.xpath("//div[@class='accordion__panel']//p[text()='" + answer + "']")).getText();
     }
+
 
 }

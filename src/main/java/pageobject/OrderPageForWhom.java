@@ -1,6 +1,9 @@
 package pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class OrderPageForWhom {
     private final By nameField = By.xpath(".//input[contains(@placeholder, 'Имя')]");
@@ -11,24 +14,30 @@ public class OrderPageForWhom {
     private final By telephoneField = By.xpath(".//div[5]/input[contains(@class, 'Input_Input__1iN_Z')]");
     private final By nextButton = By.xpath(".//button[text()='Далее']");
     private final By formOrder = By.xpath(".//div[@class='Order_Form__17u6u']");
-
-
     private final WebDriver driver;
 
-    public OrderPageForWhom(WebDriver driver) {
-        this.driver = driver;
+
+    public OrderPageForWhom(WebDriver driver) {this.driver = driver; }
+
+    public OrderPageForWhom enterName(String name) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        wait.until(ExpectedConditions.presenceOfElementLocated(nameField));
+        driver.findElement(nameField).sendKeys(name);
+        return this;
     }
 
-    public void enterName(String name) {
-        this.driver.findElement(this.nameField).sendKeys(name);
+    public OrderPageForWhom enterSurname(String surname) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        wait.until(ExpectedConditions.presenceOfElementLocated(surnameField));
+        driver.findElement(surnameField).sendKeys(surname);
+        return this;
     }
 
-    public void enterSurname(String surname) {
-        this.driver.findElement(this.surnameField).sendKeys(surname);
-    }
-
-    public void enterAddress(String address) {
-        this.driver.findElement(this.addressField).sendKeys(address);
+    public OrderPageForWhom enterAddress(String address) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        wait.until(ExpectedConditions.presenceOfElementLocated(surnameField));
+        driver.findElement(addressField).sendKeys(address);
+        return this;
     }
 
     public void clickMetroStation() {
@@ -48,3 +57,5 @@ public class OrderPageForWhom {
     }
 
 }
+
+//
