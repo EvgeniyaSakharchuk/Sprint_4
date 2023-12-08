@@ -26,7 +26,6 @@ public class MainPage {
     private final By cookieButton = By.id("rcc-confirm-button");
     // кнопка с куки
     private final By frequentlyAskedQuestionsHeader = By.xpath("//div[@class='Home_FourPart__1uthg']//div[@class='Home_SubHeader__zwi_E']");
-
 // Заголовок Вопросы о важном new
 
     //-----------------------------------------------------------------------------------
@@ -77,6 +76,5 @@ public class MainPage {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='accordion__panel']//p[text()='" + answer + "']"))));
         return driver.findElement(By.xpath("//div[@class='accordion__panel']//p[text()='" + answer + "']")).getText();
     }
-
 
 }
