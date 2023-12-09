@@ -13,10 +13,10 @@ import static pageobject.MainPage.*;
 public class CheckIsFormOpened extends BaseTest {
     @Test
     public void checkFormIsOpen(){
-        MainPage MainPage = new MainPage(driver);
-        MainPage.site();
-        MainPage.clickCookie();
-        MainPage.clickButtonCeneter();
+        MainPage mainPage = new MainPage(driver);
+        String mainPage1 = SITE;
+        mainPage.clickCookie();
+        mainPage.clickButtonCeneter();
         OrderPageForWhom orderPageForWhom = new OrderPageForWhom(driver);
         assertTrue(orderPageForWhom.isFormOpened());
 

@@ -14,14 +14,14 @@ public class MainPage {
 
     public static final
     // url главной страницы-//----------------------------------------------------------
-    String site = "https://qa-scooter.praktikum-services.ru/";
-    private static WebDriver driver = null;
+    String SITE = "https://qa-scooter.praktikum-services.ru/";
+    private final WebDriver driver;
 
 
     //--------------------------------------------------------------------------------------
-    public static final By orderButtonAbove = By.xpath(".//button[@class='Button_Button__ra12g']");
+    public static final By ORDER_BUTTON_ABOVE = By.xpath(".//button[@class='Button_Button__ra12g']");
     // кнопка Заказать в шапке сайта
-    public static final By orderButtonCenter = By.xpath(".//button[@class='Button_Button__ra12g']");
+    public static final By ORDER_BUTTON_CENTER = By.xpath(".//button[@class='Button_Button__ra12g']");
     // кнопка заказать по центру сайта
     private final By cookieButton = By.id("rcc-confirm-button");
     // кнопка с куки
@@ -34,22 +34,22 @@ public class MainPage {
     }
 
     public MainPage clickButtonCeneter(){
-        WebElement buttonStartOrder = driver.findElement(orderButtonCenter);
+        WebElement buttonStartOrder = driver.findElement(ORDER_BUTTON_CENTER);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", buttonStartOrder);
-        driver.findElement(orderButtonCenter).click();
+        driver.findElement(ORDER_BUTTON_CENTER).click();
         return this;
     }
 
     public  final MainPage site() {
-        driver.get(site);
+        driver.get(SITE);
         final MainPage mainPage = this;
-        return mainPage;
+        return this;
     }
 
     // Методы общие ----------------------------------------------------------
 
     public MainPage clickButtonAbove(){
-        driver.findElement(orderButtonAbove).click();
+        driver.findElement(ORDER_BUTTON_ABOVE).click();
         return this;
     }
 

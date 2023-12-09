@@ -48,7 +48,6 @@ public class PlaceOrderKickScooter extends BaseTest {
         orderPageForWhom.clickMetroStation();
         orderPageForWhom.enterPhoneNumber(phoneNumber);
         orderPageForWhom.clickNextButton();
-        //раздел для кого самокат
 
         OrderPageAboutRent orderPageAboutRent = new OrderPageAboutRent(driver);
         orderPageAboutRent.chooseDate(dayWhatIWant);
@@ -58,7 +57,6 @@ public class PlaceOrderKickScooter extends BaseTest {
         orderPageAboutRent.clickFinalOrderButton();
         orderPageAboutRent.confirmOrder();
         orderPageAboutRent.checkOrderComplete();
-        //раздел про время аренды самоката
     }
 
 }

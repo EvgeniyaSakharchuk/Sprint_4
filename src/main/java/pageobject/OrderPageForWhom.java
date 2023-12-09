@@ -44,7 +44,11 @@ public class OrderPageForWhom {
         this.driver.findElement(this.metroField).click();
         this.driver.findElement(this.metroStation).click();
     }
-
+    public final MainPage clickCookie() {
+        By cookieButton = null;
+        driver.findElement(cookieButton).click();
+        return this.clickCookie();
+    }
     public void enterPhoneNumber(String number) {
         this.driver.findElement(this.telephoneField).sendKeys(number);
     }
